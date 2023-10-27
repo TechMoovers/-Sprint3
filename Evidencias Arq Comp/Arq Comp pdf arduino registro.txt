@@ -1,0 +1,199 @@
+Microsoft Windows [versão 10.0.22621.2428]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin> mysql -h localhost -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 77
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> grant all privileges on *.* to 'insertGrupo4'@'localhost';
+ERROR 1410 (42000): You are not allowed to create a user with GRANT
+mysql> create user 'insertGrupo4'@'localhost' indentified by 'grupo4';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'indentified by 'grupo4'' at line 1
+mysql> CREATE USER ‘novo-usuário’@’localhost’ IDENTIFIED BY ‘senha’;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?novo-usuário?@?localhost? IDENTIFIED BY ?senha?' at line 1
+mysql> create user 'insertGrupo4'@'localhost' identified by 'senha';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> grant all privileges on *.* to 'insertGrupo4'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| alunosprojetos     |
+| arqcomp            |
+| bdprototipopi      |
+| campanha           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pet                |
+| praticafuncionario |
+| revisao            |
+| sakila             |
+| spetech            |
+| sptech             |
+| sys                |
+| treinador          |
+| world              |
++--------------------+
+16 rows in set (0.00 sec)
+
+mysql> create database Grupo4API;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table sensorAPI(
+    -> idTemp int primary key auto_increment,
+    -> temp1 float,
+    -> temp2 float,
+    -> temp3 float,
+    -> temp4 float,
+    -> temp5 float);
+ERROR 1046 (3D000): No database selected
+mysql> use Grupo4API;
+Database changed
+mysql> create table sensorAPI(
+    -> idTemp int primary key auto_increment,
+    -> temp1 float,
+    -> temp2 float,
+    -> temp3 float,
+    -> temp4 float,
+    -> temp5 float);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table sensorUmiAPI(
+    -> idUmi int primary key auto_increment,
+    -> umi1 float,
+    -> umi2 float,
+    -> umi3 float,
+    -> umi4 float,
+    -> umi5 float);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from sensorUmiAPI;
++-------+--------+--------+--------+--------+--------+
+| idUmi | umi1   | umi2   | umi3   | umi4   | umi5   |
++-------+--------+--------+--------+--------+--------+
+|     1 |     54 |     55 |     52 |     27 |     56 |
+|     2 |  27.37 |  28.37 |  25.37 | 13.685 |  29.37 |
+|     3 |     52 |     53 |     50 |     26 |     54 |
+|     4 |  27.37 |  28.37 |  25.37 | 13.685 |  29.37 |
+|     5 |     37 |     38 |     35 |   18.5 |     39 |
+|     6 |      0 |      1 |     -2 |      0 |      2 |
+|     7 |     51 |     52 |     49 |   25.5 |     53 |
+|     8 |  27.86 |  28.86 |  25.86 |  13.93 |  29.86 |
+|     9 |  27.37 |  28.37 |  25.37 | 13.685 |  29.37 |
+|    10 |     39 |     40 |     37 |   19.5 |     41 |
+|    11 |  27.37 |  28.37 |  25.37 | 13.685 |  29.37 |
+|    12 |     54 |     55 |     52 |     27 |     56 |
+|    13 |     53 |     54 |     51 |   26.5 |     55 |
+|    14 |  27.86 |  28.86 |  25.86 |  13.93 |  29.86 |
+|    15 |      0 |      1 |     -2 |      0 |      2 |
+|    16 |  26.39 |  27.39 |  24.39 | 13.195 |  28.39 |
+|    17 |     53 |     54 |     51 |   26.5 |     55 |
+|    18 |     54 |     55 |     52 |     27 |     56 |
+|    19 |  27.86 |  28.86 |  25.86 |  13.93 |  29.86 |
+|    20 |     54 |     55 |     52 |     27 |     56 |
+|    21 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    22 |     54 |     55 |     52 |     27 |     56 |
+|    23 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    24 |     54 |     55 |     52 |     27 |     56 |
+|    25 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    26 |     54 |     55 |     52 |     27 |     56 |
+|    27 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    28 |     54 |     55 |     52 |     27 |     56 |
+|    29 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    30 |     54 |     55 |     52 |     27 |     56 |
+|    31 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    32 |     54 |     55 |     52 |     27 |     56 |
+|    33 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    34 |     54 |     55 |     52 |     27 |     56 |
+|    35 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    36 |     54 |     55 |     52 |     27 |     56 |
+|    37 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    38 |     54 |     55 |     52 |     27 |     56 |
+|    39 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    40 |     54 |     55 |     52 |     27 |     56 |
+|    41 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    42 |     54 |     55 |     52 |     27 |     56 |
+|    43 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    44 |     54 |     55 |     52 |     27 |     56 |
+|    45 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    46 |     54 |     55 |     52 |     27 |     56 |
+|    47 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    48 |     54 |     55 |     52 |     27 |     56 |
+|    49 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    50 |     54 |     55 |     52 |     27 |     56 |
+|    51 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    52 |     54 |     55 |     52 |     27 |     56 |
+|    53 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    54 |     54 |     55 |     52 |     27 |     56 |
+|    55 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    56 |     54 |     55 |     52 |     27 |     56 |
+|    57 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    58 |     54 |     55 |     52 |     27 |     56 |
+|    59 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    60 |     54 |     55 |     52 |     27 |     56 |
+|    61 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    62 |     55 |     56 |     53 |   27.5 |     57 |
+|    63 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    64 |     54 |     55 |     52 |     27 |     56 |
+|    65 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    66 |     54 |     55 |     52 |     27 |     56 |
+|    67 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    68 |     54 |     55 |     52 |     27 |     56 |
+|    69 | 198.18 | 199.18 | 196.18 |  99.09 | 200.18 |
+|    70 |     55 |     56 |     53 |   27.5 |     57 |
+|    71 |  192.5 |  193.5 |  190.5 |  96.25 |  194.5 |
+|    72 |     55 |     56 |     53 |   27.5 |     57 |
+|    73 |  192.5 |  193.5 |  190.5 |  96.25 |  194.5 |
+|    74 |     55 |     56 |     53 |   27.5 |     57 |
+|    75 |  192.5 |  193.5 |  190.5 |  96.25 |  194.5 |
+|    76 |     55 |     56 |     53 |   27.5 |     57 |
+|    77 |  192.5 |  193.5 |  190.5 |  96.25 |  194.5 |
+|    78 |     56 |     57 |     54 |     28 |     58 |
+|    79 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    80 |     57 |     58 |     55 |   28.5 |     59 |
+|    81 | 186.83 | 187.83 | 184.83 | 93.415 | 188.83 |
+|    82 |     57 |     58 |     55 |   28.5 |     59 |
+|    83 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    84 |     57 |     58 |     55 |   28.5 |     59 |
+|    85 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    86 |     56 |     57 |     54 |     28 |     58 |
+|    87 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    88 |     57 |     58 |     55 |   28.5 |     59 |
+|    89 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    90 |     59 |     60 |     57 |   29.5 |     61 |
+|    91 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    92 |     59 |     60 |     57 |   29.5 |     61 |
+|    93 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    94 |     58 |     59 |     56 |     29 |     60 |
+|    95 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|    96 |     56 |     57 |     54 |     28 |     58 |
+|    97 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|    98 |     56 |     57 |     54 |     28 |     58 |
+|    99 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|   100 |     56 |     57 |     54 |     28 |     58 |
+|   101 | 188.72 | 189.72 | 186.72 |  94.36 | 190.72 |
+|   102 |     57 |     58 |     55 |   28.5 |     59 |
+|   103 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|   104 |     57 |     58 |     55 |   28.5 |     59 |
+|   105 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
+|   106 |     56 |     57 |     54 |     28 |     58 |
+|   107 | 190.61 | 191.61 | 188.61 | 95.305 | 192.61 |
++-------+--------+--------+--------+--------+--------+
+107 rows in set (0.00 sec)
+
+mysql> select * from sensorUmiAPI;
