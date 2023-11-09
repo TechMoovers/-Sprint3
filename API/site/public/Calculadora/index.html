@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="titulo">Simulador Financeiro</h1>
+    </div>
+    <div class="container1">
+        <div class="calculadora">
+            <h4 class="tituloCalculadora">Calcular perda</h4>
+            <div>
+                <div class="inputContainer">
+                    <span class="textInput">Custo por arroba:</span><br>
+                    <input class="calcInput" type="number" id="inputCustoArroba">
+                </div>
+                <div class="inputContainer">
+                    <span class="textInput">Quantidade de bovinos <b>machos</b> transportados mensalmente:</span><br>
+                    <input class="calcInput" type="number" id="inputQtdBovinosMachos">
+                </div>
+                <div class="inputContainer">
+                    <span class="textInput">Quantidade de bovinos <b>fêmeas</b> transportados mensalmente:</span><br>
+                    <input class="calcInput" type="number" id="inputQtdBovinosFemeas">
+                </div>
+            </div>
+            <button onclick="calcularPerda()" class="btnCalcular">Calcular</button><br>
+            <a href="C:\Users\dudab\OneDrive\Documentos\sitesprint2\siteInstitucional\public\index.html">Sair da calculadora</a>
+        </div>
+        <div class="boxes">
+            <div class="container2">
+                <div class="boxTituloContainer2">
+                    <h4 class="tituloContainer2">Resultado</h4>
+                </div><br>
+                <div class="infoContainer2">
+                    <div id="infoPre"></div>
+                    <div id="infoTotal"></div>
+                </div>
+                <div class="container3">
+                    <div class="boxTituloContainer3">
+                        <h4 class="tituloContainer3">Lucro</h4>
+                    </div>
+                    <div class="infoContainer3">
+                        <div id="infoPre"></div>
+                        <div id="infoTotal"></div>
+                        <div id="infoResult"></div>
+                    </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="js.js"></script>
+</body>
+</html>
