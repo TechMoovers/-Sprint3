@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <div class="cabeçalho">
+        <div class="container">
+            <h1 class="titulo">TechMoovers</h1>
+            <ul class="navBar">
+                <li><a href="file:///C:/Users/dudab/OneDrive/Documentos/siteTech/siteInstitucional/public/index.html">Início</a></li>
+                |
+                <li><a href="file:///C:/Users/dudab/OneDrive/Documentos/siteTech/siteInstitucional/public/index.html">Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+
+        <div class="form">
+            <div class="titulobox">
+                <h1><i>Cadastre-se</i></h1>
+            </div>
+            <div class="grupo">
+                <div class="box">
+                    <label for="firstname">Razão Social</label>
+                    <input type="text" id="input_firstname" required>
+                </div>
+                <div class="box">
+                    <label for="fantasy">Nome Fantasia</label>
+                    <input type="text" id="input_fantasy" required>
+                </div>
+                <div class="box">
+                    <label for="CNPJ">CNPJ</label>
+                    <input type="text" id="input_CNPJ" max="13" placeholder="XX.XXX.XXX/0001-XX" required>
+                </div>
+                <div class="box">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="input_email" placeholder="meuemail@provedor.com" required>
+                </div>
+                <div class="box">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="input_senha" placeholder="*****" required>
+                </div>
+            </div>
+            <div class="confirm-button">
+                <button id="botao" onclick="cadastrar()">Cadastrar</button>
+            </div>
+        </div>
+
+        <!-- <div class="blue">
+            <img src="assets/imgs/blue.png">
+        </div> -->
+        <!-- <div class="boi">
+            <img src="assets/imgs/boi grande2.0.png">
+        </div> -->
+    </div>
+
+</body>
+
+</html>
+<script>
+    function cadastrar() {
+        var razaoSocial = input_firstname.value;
+        var nomeFantasia = input_fantasy.value;
+        var cnpj = Number(input_CNPJ.value);
+        var email = input_email.value;
+        var senha = Number(input_senha.value);
+
+        var repeticao = 1;
+
+        // if (email.indexOf("@") > - 1) {
+        //     var cnpjInserido = cnpj;
+        //     if (cnpjInserido > cnpj || cnpjInserido < cnpj) {
+        //         alert(`"Cnpj precisas ter 11 números"`)
+        //     } else {
+        //         window.location.href = "index.html"
+
+        //     }  
+        // } else {
+        //     alert(`"não tem @"`)
+        // }
+
+        //if(repeticao > maxCnpj || repeticao < maxCnpj){
+           // alert("cnpj precisa ter 14 numeros")
+
+           if(cnpj <=17 || cnpj>=19) {
+            window.location.href= "file:///C:/Users/dudab/OneDrive/Documentos/siteTech/siteInstitucional/public/index.html"
+           }else {
+            alert("cnpj inválido")
+           }
+        }
+    
+</script>
