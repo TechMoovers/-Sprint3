@@ -125,6 +125,7 @@ a{
 .boxes{
     height: 550px; 
     background-color: #151a1d;
+    display: none;
 }
 
 /* Box RESULTADO */

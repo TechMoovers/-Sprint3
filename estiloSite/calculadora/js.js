@@ -6,10 +6,14 @@ var infoPre = document.getElementById("infoPre");
 var infoTotal = document.getElementById("infoTotal");
 var infoResult = document.getElementById("infoResult");
 
+var boxes = document.querySelector(".boxes")
+
 function calcularPerda() {
     var custoArroba = inputCustoArroba.value;
     var qtdBovinosMachos = inputQtdBovinosMachos.value;
     var qtdBovinosFemeas = inputQtdBovinosFemeas.value;
+
+    boxes.style.display === "flex"? boxes.style.display = "none": boxes.style.display = "flex"
 
     //Cálculo perda pré-abate - transporte
 
@@ -39,3 +43,6 @@ function calcularPerda() {
             <p>Com a nossa solução, sua empresa <b>deixará de perder</b> mensalmente <b><span class="positive-text">R$${oQueDeixaDePerder.toFixed(2)}</span></b> e anualmente <b><span class="positive-text">R$${(oQueDeixaDePerder * 12).toFixed(2)}</span></b> baseado na diminuição da oscilação de temperatura.</p>
             `
     }
+
+
+
