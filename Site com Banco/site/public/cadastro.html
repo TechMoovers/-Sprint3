@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="shortcut icon" href="assets/imgs/boi-grande2.0.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style2.css">
+</head>
+
+<body>
+  <!-- Cabeçalho -->
+  <div class="cabeçalho">
+    <div class="container">
+      <h1 class="titulo">TechMoovers</h1>
+      <ul class="navBar">
+        <li><a href="index.html">Início</a></li>
+        |
+        <li><a href="index.html">Login</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Banner -->
+  <div class="banner">
+
+    <div class="form">
+      <div class="titulobox">
+        <h1><i>Cadastre-se</i></h1>
+      </div>
+      <div class="grupo">
+        <div class="box">
+          <label for="firstname">Razão Social</label>
+          <input type="text" id="razao_input" required>
+        </div>
+        <div class="box">
+          <label for="fantasy">Nome Fantasia</label>
+          <input type="text" id="nome_input" required>
+        </div>
+        <div class="box">
+          <label for="CNPJ">CNPJ</label>
+          <input type="text" id="input_cnpj" max="13" placeholder="XX.XXX.XXX/0001-XX" required>
+        </div>
+        <div class="box">
+          <label for="email">E-mail</label>
+          <input type="email" id="email_input" placeholder="meuemail@provedor.com" required>
+        </div>
+        <div class="box">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha_input" placeholder="*****" required>
+        </div>
+      </div> <br>
+      <button id="botao" onclick="cadastrar()">Cadastrar</button>
+    </div>
+
+    <!-- <div class="blue">
+            <img src="assets/imgs/blue.png">
+        </div> 
+        <div class="boi">
+            <img src="assets/imgs/boi grande2.0.png">
+        </div>
+    </div>  -->
+
+</body>
+
+</html>
+
+<script>
+  function cadastrar() {
+    var razaoVar = razao_input.value;
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var cnpjVar = input_cnpj.value;
+
+    if (
+      razaoVar == "" ||
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      cnpjVar == ''
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } if (nomeVar < 1) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Nome Fraco)";
+      finalizarAguardar();
+      return false;
+    } else if (emailVar.indexOf('@') == -1) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Email Invalido)";
+      finalizarAguardar();
+      return false;
+    } else if (senhaVar < 6) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Senha Fraca)";
+      finalizarAguardar();
+      return false;
+    } else if (cnpjVar == 14) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(CPF Invalido)";
+      finalizarAguardar();
+      return false;
+    } else {
+      //  setInterval(sumirMensagem, 5000);
+
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          razaoServer: razaoVar,
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          cnpjServer: cnpjVar,
+          
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+
+            // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML =
+            // "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            setTimeout(() => {
+              window.location = "/login.html";
+            }, 2000);
+
+            limparFormulario();
+            finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+      // .catch(function (resposta) {
+      //   console.log(`#ERRO: ${resposta}`);
+      //   finalizarAguardar();
+      // });
+
+      // return false;
+      //}
+
+      function listar() {
+        fetch("/empresas/listar", {
+          method: "GET",
+        })
+          .then(function (resposta) {
+            resposta.json().then((empresas) => {
+              empresas.forEach((empresa) => {
+                listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+              });
+            });
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+          });
+      }
+      // function sumirMensagem() {
+      //   if (cardErro) {
+      //     cardErro.style.display = "none";
+      //   } else {
+      //     console.error("cardErro is not defined or null");
+      //   }
+    }
+  }
+
+
+
+</script>

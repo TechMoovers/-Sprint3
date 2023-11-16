@@ -1,0 +1,173 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #151a1d;
+    background-image: url(bovinos.jpg);
+    backdrop-filter: brightness(30%);
+    background-size: cover;
+}
+
+/* Cabeçalho */
+.cabeçalho{
+    height: 80px;
+    /* background-color: #151a1d; */
+}
+
+.cabeçalho .container{
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+}
+
+.cabeçalho ul{
+    font-weight: 1000;
+    color: #ffffff;
+}
+
+a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.titulo{
+    color: #ffffff;
+    width: fit-content;
+    font-weight: 500;
+    align-items: center;
+    display: flex; 
+}
+
+.titulobox{
+    color: #3B89FE;
+}
+
+.navBar{
+    width: 189px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;  
+}
+
+
+/* Corpo */
+.banner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form{
+    width: 22%;
+    height: 58%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 1;
+    top: 12%;
+    border-radius: 10px; 
+    box-shadow: 0px 10px 40px #000000;   
+}
+
+.form input{
+    height: 28px;
+    border-radius: 10px;
+    border: 0;
+    border: 2px solid #3B89FE;
+    background-color: #dbdbda;
+    text-align: center;
+}
+
+.form input::placeholder{
+    color: #454545;
+}
+
+/* Botão */
+.confirm-button{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.confirm-button button{
+    height: 28px;
+    border-radius: 10px;
+    border: 0;
+    background-color: #3B89FE;
+    width: 88px;
+    height: 35px;
+}
+
+.confirm-button a{
+    color: #ffffff;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Corpo>Boi */
+.boi{
+    position:absolute;
+    z-index: 0;
+    right: 45%;
+    top: 25%;
+}
+
+.boi img{
+    width: 350px;
+    height: 350px;
+}
+
+.blue{
+    position:absolute;
+    z-index: 0;
+    right: 65%;
+    top: 15%;
+    right: 35%;
+}
+
+.blue img{
+    width: 900px;
+    height: 500px;
+    border-radius: 5%
+}
+
+#botao {
+    border-radius: 34px;
+    border: 3px solid #3B89FE;;
+    background-color: transparent;
+    color: black;
+    height: 30px;
+    width: 120px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    margin-left: 1%;
+  }
+  
+  #botao:hover {
+    color: #3B89FE;
+    background-color: #151A1D;
+    transition: 0.8;
+    border: none; 
+  } 
+
+  
+
