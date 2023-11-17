@@ -107,6 +107,20 @@ select * from suporte;
 
 alter table usuario add constraint fkSup foreign key (fkSuporte) references suporte (idSuporte);
 
+create table alertaUmidade(
+idAlertaU int primary key auto_increment,
+idealU decimal (2,1),
+criticoU decimal (2,1),
+alertaU decimal (2,1)
+);
+create table alertaTemperatura(
+idAlertaT int primary key auto_increment,
+idealT decimal (2,1),
+criticoT decimal (2,1),
+alertaT decimal (2,1)
+);
+
+
 -- joins -
 
 select*from clienteEmpresa join usuario on idCliente = FkCliente;

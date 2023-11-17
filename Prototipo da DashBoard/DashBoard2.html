@@ -5,33 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Techmoovers</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style2.css">
 </head>
 
 <body>
 
     <div class="container">
-        <div class="caixa"></div>
+
+        
+         <div class="caixa"></div> 
         <div class="icons">
             <div class="iconHome">
-                <img src="Public/img/Captura_de_tela_2023-11-15_182012-removebg-preview.png" alt="">
+               <img src="Public/img/Captura_de_tela_2023-11-15_182012-removebg-preview.png" alt="">
                 <img src="Public/img/support-svgrepo-com.png" alt="">
                 <img src="Public/img/users-plus-svgrepo-com.png" id="users" alt="">
                 <img src="Public/img/logout-svgrepo-com.png" id="logout" alt="">
             </div>
-        </div>
+        </div> 
         <div class="containerTexto">
             <h1>Bem vindo de volta, Usuário👋</h1>
-            <p>Verifique as mudanças desde sua última visita</p>
+            <p>Verifique as mudanças desde sua última visita<br>
+                PLACA: HJU3515
+            </p>
+
         </div>
         <div class="containerInput">
             <input type="text" id="input_pesquisa" placeholder="Pesquisar...">
         </div>
-        
-        
-        
+
+
+
     </div>
-   <div class="container2">
+    <div class="container2">
         <div class="cardAlert1">
             <h2>Crítico</h2>
             Verifique o seu ambiente!
@@ -40,9 +46,12 @@
         <div class="cardAlert2">
             <h2>Ideal</h2>
             Mantenha a temperatura <br>
-             e umidade
-             do seu ambiente!
+            e umidade
+            do seu ambiente!
+
+
             <div class="cardVerde"></div>
+
         </div>
         <div class="cardAlert3">
             <h2>Alerta</h2>
@@ -52,40 +61,159 @@
     </div>
 
 
-     <div class="container3">
-        <div class="dashTemp">
-            <img src="Public/img/Imagem do WhatsApp de 2023-11-14 à(s) 20.43.14_58f6abd1.jpg">
-            <div class="card">
-                <h2>Minha Temperatura</h2>
-                14/11/2023 as 19:08<br>
-                    PLACA: HJU3515
+    <div class="container3">
 
-                    <div class="texto2">
-                        <div class="divVerde"></div>
-                    <p>20º<br>
+        <div class="chart-container">
+            <canvas id="myChart" style="height: 300px;"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="myChart2" style="height: 300px;"></canvas>
+        </div>
+
+
+        <div class="card" >
+            <div class="cardT">
+            <h2>Minha Temperatura</h2>
+            14/11/2023 as 19:08<br>
+</div>
+
+            <div class="texto2">
+                <div class="divVerde"></div>
+                <p>20°C<br>
                     Mantenha a temperatura e <br>
                     umidade do seu ambiente!</p>
+            </div>
+
+
+            <div class="card1">
+                <h2>Minha Umidade</h2>
+                14/11/2023 as 19:08<br>
+
+
+                <div class="texto2">
+                    <div class="divVerde"></div>
+                    <p>65%<br>
+                        Mantenha a temperatura e <br>
+                        umidade do seu ambiente!</p>
                 </div>
             </div>
         </div>
+
     </div>
 
-     <div class="container3" id="cont">
-        <div class="dashTemp">
-            <img src="Public/img/Imagem do WhatsApp de 2023-11-14 à(s) 20.43.14_58f6abd1.jpg">
-            <div class="card">
-                <h2>Minha Umidade</h2>
-                14/11/2023 as 19:08<br>
-                    PLACA: HJU3515
+    <script>
+        const labels = [
+            '06h - 07h',
+            '07h - 08h',
+            '08h - 09h',
+            '09h - 10h',
+            '10h - 11h',
+            '12h - 13h',
+            '13h - 14h',
+            '14h - 15h',
+            '15h - 16h',
+            '16h - 17',
+            '17h - 18h',
+            '19h - 20h',
+            '20h - 21h',
+            '21h - 22h',
+            '22h - 23h',
+            '23h - 00h',
+            '1h - 2h',
+            '2h - 3h',
+            '3h - 4h',
+            '4h - 5h',
+            '5h - 6h',
+        ];
 
-                    <div class="texto2">
-                        <div class="divVerde"></div>
-                    <p>65%<br>
-                    Mantenha a temperatura e <br>
-                    umidade do seu ambiente!</p>
-            </div>
-        </div>
-    </div> 
+        //  aqui muda a cor das letra
+        Chart.defaults.color = '#FFF';
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Temperatura °C LM35',
+                backgroundColor: '#f17ea1',
+                borderColor: '#f17ea1',
+                textStrokeColor: '#fff',
+                data: [12, 13, 14, 15, 18, 22, 25, 26, 28, 28, 25, 23, 23, 22, 21, 21, 20, 19, 19, 18, 18],
+            },
+
+            ]
+        };
+
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };  
+    </script>
+
+    <script>
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+    </script>
+
+
+    <script>
+
+        const labels2 = [
+            '06h - 07h',
+            '07h - 08h',
+            '08h - 09h',
+            '09h - 10h',
+            '10h - 11h',
+            '12h - 13h',
+            '13h - 14h',
+            '14h - 15h',
+            '15h - 16h',
+            '16h - 17',
+            '17h - 18h',
+            '19h - 20h',
+            '20h - 21h',
+            '21h - 22h',
+            '22h - 23h',
+            '23h - 00h',
+            '1h - 2h',
+            '2h - 3h',
+            '3h - 4h',
+            '4h - 5h',
+            '5h - 6h',
+
+        ];
+
+        const data2 = {
+            labels: labels2,
+            datasets: [{
+                label: 'Umidade % DHT11',
+                backgroundColor: '#00008b',
+                borderColor: '#00008b',
+                data: [90, 89, 93, 87, 88, 82, 75, 80, 74, 79, 80, 95, 45, 80, 80, 71, 85, 84, 85, 87, 89],
+            }
+            ]
+        };
+
+        const config2 = {
+            type: 'line',
+            data: data2,
+            options: {}
+        };
+
+
+    </script>
+
+    <script>
+        const myChart2 = new Chart(
+            document.getElementById('myChart2'),
+            config2
+        );
+    </script>
+
 </body>
 
-</html> 
+</html>

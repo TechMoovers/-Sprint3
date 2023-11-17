@@ -7,7 +7,7 @@
 
 .container {
     display: flex;
-    flex-direction: row;
+   
 }
 
 .caixa {
@@ -22,6 +22,7 @@
 
 .caixa:hover {
     box-shadow: 0px 6px 8px rgba(11, 11, 11, 0.8);
+   
 }
 
 .iconHome img {
@@ -34,7 +35,7 @@
 .containerTexto h1 {
     text-shadow: 0px 4px 6px rgb(15, 15, 15);
     display: flex;
-    width: 100%;
+    width: 110%;
     flex-direction: column;
     margin-left: 8%;
     font-family: 'Noto Sans';
@@ -43,12 +44,14 @@
     color: #FFFFFF;
 }
 
+
 .containerTexto p {
     display: flex;
     width: 100%;
     opacity: 40%;
     flex-direction: column;
     margin-left: 8%;
+    padding: 2%;
     font-family: 'Noto Sans';
     font-style: normal;
     color: #FFFFFF;
@@ -59,7 +62,8 @@
     flex-direction: row;
     margin-left: 45%;
     height: 5%;
-    padding-top: 5%;
+    padding: 1%;
+  
 }
 
 .containerInput input {
@@ -74,7 +78,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-top: -390px;
+    margin-top: -350px;
+
+   
 }
 
 .cardAlert1 h2 {
@@ -189,28 +195,12 @@
 
 .container3 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 3%;
+ 
+   
 }
 
-#cont {
-    margin-top: 25%;
-
-}
-
-.dashTemp img {
-    display: flex;
-    width: 45%;
-    border-radius: 15px;
-    box-shadow: 6px 4px 6px rgba(9, 8, 9, 0.5);
-    position: absolute;
-    margin-left: 9.5%;
-}
-
-.dashTemp {
-    display: flex;
-    flex-direction: row;
-}
 
 .card {
     background-color: #2F3234;
@@ -218,13 +208,33 @@
     color: #FFFFFF;
     flex-direction: column;
     position: absolute;
+    margin-top: 3rem;
     margin-left: 65%;
     border-radius: 15px;
-    height: 46%;
+    height: 36%;
     width: 25%;
     box-shadow: 6px 4px 6px rgba(9, 8, 9, 0.5);
-    align-items: center;
+    
 }
+.card1{
+    background-color: #2F3234;
+    color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 6px 4px 6px rgba(9, 8, 9, 0.5);
+    margin-top: 50%;
+    padding: 9%
+    
+}
+
+.cardT{
+    background-color: #2F3234;
+    color: #FFFFFF;
+    border-radius: 15px;
+    padding: 5%;
+    
+    
+}
+
 
 .card h2 {
     background-color: #2F3234;
@@ -234,14 +244,16 @@
     margin-top: 5%;
     font-family: 'Noto Sans';
     font-style: normal;
+    margin-left: 5px;
 }
+
 
 .texto2 {
     display: flex;
     flex-direction: row;
     background-color: #2F3234;
-    width: 100%;
     margin-top: 7%;
+   
 }
 
 .texto2 p {
@@ -268,4 +280,12 @@
     flex-direction: row;
     margin-top: 8%;
     margin-left: 5%;
+}
+.chart-container {
+    width: 40%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(134, 131, 131, 0.2);
+    margin-top: 40px;
+    margin-left: 130px;
 }
