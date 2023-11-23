@@ -3,39 +3,40 @@ Create database TechMoovers;
 
 Use TechMoovers;
 
-create table clienteEmpresa(
-idCliente int primary key auto_increment,
-razaoSocial varchar(50),
-nomeFantasia varchar(50),
-cnpj char(14)) ;
+-- create table clienteEmpresa(
+-- idCliente int primary key auto_increment,
+-- razaoSocial varchar(50),
+-- nomeFantasia varchar(50),
+-- cnpj char(14)) ;
 
-INSERT INTO clienteEmpresa VALUES 
-(null, 'JBS S/A', 'Friboi', '02916265004076'),
-(null, 'Transporte de gado JBS','Uboi', '02916265000160');
+-- INSERT INTO clienteEmpresa VALUES 
+-- (null, 'JBS S/A', 'Friboi', '02916265004076'),
+-- (null, 'Transporte de gado JBS','Uboi', '02916265000160');
 
-select * from clienteEmpresa;
+-- select * from clienteEmpresa;
 
 
 create table usuario(
 idUsuario int primary key auto_increment,
-nome varchar(50),
+razaoSocial varchar(50),
+nomeFantasia varchar(50),
+cnpj char(14),
 email varchar(50),
 senha char(8),
-fkCliente int,
-constraint fkCli foreign key (fkCliente) references clienteEmpresa(idCliente),
-fkSuporte int);
+fkSuporte int
+);
 
 
 INSERT INTO usuario VALUES
-(null, 'Friboi', 'friboi@gmail.com', 'Friboi47', 2,10),
-(null, 'Uboi', 'uboi@gmail.com', 'uboi1547',1,11);
+(null, 'JBS S/A', 'Friboi', '02916265004076', 'friboi@gmail.com', 'Friboi47', 10),
+(null, 'Transporte de gado JBS','Uboi', '02916265000160', 'uboi@gmail.com', 'uboi1547',11);
 
 
 create table boi (
 idBoi int primary key auto_increment,
 qtdBois varchar(45),
-fkClienteEmpresa int,
-foreign key (fkClienteEmpresa) references clienteEmpresa(idCliente));
+fkUsuario int,
+constraint fkUser foreign key (fkUsuario) references usuario (idUsuario));
 
 alter table boi rename column qtdBois to qtdEspecies;
 
@@ -63,8 +64,8 @@ qtdBovinos int,
 placa varchar(7),
 fkSensor int,
 constraint fksens foreign key (fkSensor) references sensores (idSensores),
-fkCliente int,
-foreign key (fkCliente) references clienteEmpresa(idCliente));
+fkUsuario int,
+constraint fkUsu foreign key (fkUsuario) references usuario (idusuario));
 
 select * from caminhao;
 
@@ -113,6 +114,7 @@ idealU decimal (2,1),
 criticoU decimal (2,1),
 alertaU decimal (2,1)
 );
+
 create table alertaTemperatura(
 idAlertaT int primary key auto_increment,
 idealT decimal (2,1),
@@ -123,18 +125,18 @@ alertaT decimal (2,1)
 
 -- joins -
 
-select*from clienteEmpresa join usuario on idCliente = FkCliente;
 
-select* from boi join clienteEmpresa  on idCliente = fkClienteEmpresa;
+
+select* from boi join usuario  on idUsuario  = fkUsuario;
  
   
 -- quantidade de boi de cada especie dentro de um caminhão e de qual cliente é o caminhão.
 
-select clienteEmpresa.nomeFantasia, boi.qtdEspecies, especie.Especie, especie.tempIdeal,
+select usuario.nomeFantasia, boi.qtdEspecies, especie.Especie, especie.tempIdeal,
 especie.umiIdeal, caminhao.qtdBovinos, caminhao.placa from boi 
 join especie on especie.fkBoi = boi.idBoi
 join caminhao on especie.fkCaminhao = idTransp
-join clienteEmpresa on clienteEmpresa.idCliente = caminhao.fkCliente;
+join usuario on usuario.idUsuario = caminhao.fkUsuario;
 
 -- where clienteEmpresa.nomeFantasia = 'Friboi';
 
@@ -142,9 +144,9 @@ join clienteEmpresa on clienteEmpresa.idCliente = caminhao.fkCliente;
 -- join caminhao on caminhao.idTransp = especie.fkCaminhao 
 -- join boi on boi.qtdEspecies = especie.idEspecie;
   
-select usuario.nome,  suporte.tipoSuporte, suporte.nmrChamado, suporte.dtChamado, suporte.dtConclusão 
+select usuario.nomeFantasia,  suporte.tipoSuporte, suporte.nmrChamado, suporte.dtChamado, suporte.dtConclusão 
 from usuario join suporte on idSuporte = fkSuporte;
 
- drop database TechMoovers;
+ -- drop database TechMoovers;
 
 
