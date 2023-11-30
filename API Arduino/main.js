@@ -13,17 +13,17 @@ const SERVIDOR_PORTA = 3300;
 // true -> insere
 const HABILITAR_OPERACAO_INSERIR = true;
 
-// altere o valor da variável AMBIENTE para o valor desejado:
-// API conectada ao banco de dados remoto, SQL Server -> 'producao'
-// API conectada ao banco de dados local, MySQL Workbench - 'desenvolvimento'
+// altere o valor da variável AMBIENTE para o vL Workbench - 'desenvolvimento'
 const AMBIENTE = 'desenvolvimento';
-
+// valor desejado:
+// API conectada ao banco de dados remoto, SQL Server -> 'producao'
+// API conectada ao banco de dados local, MySQ
 const serial = async (
     valoresDht11Umidade,
-    valoresDht11Temperatura,
-    valoresLuminosidade,
+    // valoresDht11Temperatura,
+    // valoresLuminosidade,
     valoresLm35Temperatura,
-    valoresChave
+    // valoresChave
 ) => {
     let poolBancoDados = ''
 
@@ -32,10 +32,10 @@ const serial = async (
             {
                 // altere!
                 // CREDENCIAIS DO BANCO - MYSQL WORKBENCH
-                host: '10.18.36.77',
-                user: 'Arduino',
-                password: '12345678',
-                database: 'techmoovers'
+                host: 'localhost',
+                user: 'root',
+                password: 'Duda-2901',
+                // database: 'DATABASE_LOCAL'
             }
         ).promise();
     } else if (AMBIENTE == 'producao') {
@@ -60,30 +60,19 @@ const serial = async (
         console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
     });
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
-        
+        //console.log(data);
         const valores = data.split(';');
-        console.log(valores);
-        const dht11Umidade1 = parseFloat(valores[0]);
-        const dht11Umidade2 = parseFloat(valores[1])
-        const dht11Umidade3 = parseFloat(valores[2]);
-        const dht11Umidade4 = parseFloat(valores[3]);
+        const dht11Umidade = parseFloat(valores[0]);
+        // const dht11Temperatura = parseFloat(valores[1]);
+        const lm35Temperatura = parseFloat(valores[2]);
+        // const luminosidade = parseFloat(valores[3]);
+        // const chave = parseInt(valores[4]);
 
-        const lm35Temperatura1 = parseFloat(valores[4]);
-        const lm35Temperatura2 = parseFloat(valores[5]);
-        const lm35Temperatura3 = parseFloat(valores[6]);
-        const lm35Temperatura4 = parseFloat(valores[7]);
-        
-
-        valoresDht11Umidade.push(dht11Umidade1);
-        valoresDht11Umidade.push(dht11Umidade2);
-        valoresDht11Umidade.push(dht11Umidade3);
-        valoresDht11Umidade.push(dht11Umidade4);
-
-        valoresLm35Temperatura.push(lm35Temperatura1);
-        valoresLm35Temperatura.push(lm35Temperatura2);
-        valoresLm35Temperatura.push(lm35Temperatura3);
-        valoresLm35Temperatura.push(lm35Temperatura4);
-        
+        valoresDht11Umidade.push(dht11Umidade);
+        // valoresDht11Temperatura.push(dht11Temperatura);
+        // valoresLuminosidade.push(luminosidade);
+        valoresLm35Temperatura.push(lm35Temperatura);
+        // valoresChave.push(chave);
 
         if (HABILITAR_OPERACAO_INSERIR) {
             if (AMBIENTE == 'producao') {
@@ -92,7 +81,9 @@ const serial = async (
                 // -> altere nome da tabela e colunas se necessário
                 // Este insert irá inserir dados de fk_aquario id=1 (fixo no comando do insert abaixo)
                 // >> Importante! você deve ter o aquario de id 1 cadastrado.
-                sqlquery = `INSERT INTO medida (dht11_umidade, dht11_temperatura, luminosidade, lm35_temperatura, chave, momento, fk_aquario) VALUES (${dht11Umidade}, ${dht11Temperatura}, ${luminosidade}, ${lm35Temperatura}, ${chave}, CURRENT_TIMESTAMP, 1)`;
+
+                sqlquery = `INSERT INTO medida (dht11_umidade,lm35_temperatura, momento, fk_aquario) VALUES (${dht11Umidade},  ${lm35Temperatura},  CURRENT_TIMESTAMP, 1)`;
+            
 
                 // CREDENCIAIS DO BANCO REMOTO - SQL SERVER
                 // Importante! você deve ter criado o usuário abaixo com os comandos presentes no arquivo
@@ -101,7 +92,7 @@ const serial = async (
 
                 function inserirComando(conn, sqlquery) {
                     conn.query(sqlquery);
-                    console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
+                    console.log("valores inseridos no banco: ", dht11Umidade + ",  " + lm35Temperatura )
                 }
 
                 sql.connect(connStr)
@@ -116,15 +107,10 @@ const serial = async (
                 // Este insert irá inserir dados de fk_aquario id=1 (fixo no comando do insert abaixo)
                 // >> você deve ter o aquario de id 1 cadastrado.
                 await poolBancoDados.execute(
-                    `
-                    INSERT INTO sensores (umidade, temperatura, cenario) VALUES (?, ?, 1), (?, ?, 2), (?, ?, 3), (?, ?, 4);
-                    
-                    `,
-                    [dht11Umidade1, lm35Temperatura1, dht11Umidade2, lm35Temperatura2, dht11Umidade3, lm35Temperatura3, dht11Umidade4, lm35Temperatura4]
+                    'INSERT INTO medida (dht11_umidade, lm35_temperatura, momento, fk_aquario) VALUES (?, ?, ?, ?, ?, now(), 1)',
+                    [dht11Umidade,  lm35Temperatura, ]
                 );
-
-
-                // console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
+                console.log("valores inseridos no banco: ", dht11Umidade + ",  " + lm35Temperatura )
 
             } else {
                 throw new Error('Ambiente não configurado. Verifique o arquivo "main.js" e tente novamente.');
@@ -140,10 +126,10 @@ const serial = async (
 // não altere!
 const servidor = (
     valoresDht11Umidade,
-    valoresDht11Temperatura,
-    valoresLuminosidade,
+    // valoresDht11Temperatura,
+    // valoresLuminosidade,
     valoresLm35Temperatura,
-    valoresChave
+    // valoresChave
 ) => {
     const app = express();
     app.use((request, response, next) => {
@@ -157,38 +143,39 @@ const servidor = (
     app.get('/sensores/dht11/umidade', (_, response) => {
         return response.json(valoresDht11Umidade);
     });
-    app.get('/sensores/dht11/temperatura', (_, response) => {
-        return response.json(valoresDht11Temperatura);
-    });
-    app.get('/sensores/luminosidade', (_, response) => {
-        return response.json(valoresLuminosidade);
-    });
+    // app.get('/sensores/dht11/temperatura', (_, response) => {
+    //     return response.json(valoresDht11Temperatura);
+    // });
+    // app.get('/sensores/luminosidade', (_, response) => {
+    //     return response.json(valoresLuminosidade);
+    // });
     app.get('/sensores/lm35/temperatura', (_, response) => {
         return response.json(valoresLm35Temperatura);
     });
-    app.get('/sensores/chave', (_, response) => {
-        return response.json(valoresChave);
-    });
 }
+//     app.get('/sensores/chave', (_, response) => {
+//         return response.json(valoresChave);
+//     });
+// }
 
 (async () => {
     const valoresDht11Umidade = [];
-    const valoresDht11Temperatura = [];
-    const valoresLuminosidade = [];
+    // const valoresDht11Temperatura = [];
+    // const valoresLuminosidade = [];
     const valoresLm35Temperatura = [];
-    const valoresChave = [];
+    // const valoresChave = [];
     await serial(
         valoresDht11Umidade,
-        valoresDht11Temperatura,
-        valoresLuminosidade,
+        // valoresDht11Temperatura,
+        // valoresLuminosidade,
         valoresLm35Temperatura,
-        valoresChave
+        // valoresChave
     );
     servidor(
         valoresDht11Umidade,
-        valoresDht11Temperatura,
-        valoresLuminosidade,
+        // valoresDht11Temperatura,
+        // valoresLuminosidade,
         valoresLm35Temperatura,
-        valoresChave
+        // valoresChave
     );
 })();

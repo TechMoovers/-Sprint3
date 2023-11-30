@@ -289,3 +289,7 @@
     margin-top: 40px;
     margin-left: 130px;
 }
+
+.icon:hover{
+    padding: 10px;
+}

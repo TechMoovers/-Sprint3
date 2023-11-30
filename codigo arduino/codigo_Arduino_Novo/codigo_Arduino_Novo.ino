@@ -4,11 +4,11 @@
 * Configurações iniciais sobre os sensores
 * DHT11, LM35, LDR5 e TCRT5000
 */
-int dht_pin = A1;
+int dht_pin = A0;
 DHT dht_1 = DHT(dht_pin, dht_type);  //pode-se configurar diversos
 int switch_pin = 2;
 
-int lm35_pin = A0, leitura_lm35 = 0;
+int lm35_pin = A1, leitura_lm35 = 0;
 float temperatura;
 
 
@@ -49,5 +49,5 @@ Serial.print(";");
 Serial.print(temp3);
 Serial.print(";");
 Serial.println(temp4);
-delay(3000);
+delay(300);
 }
