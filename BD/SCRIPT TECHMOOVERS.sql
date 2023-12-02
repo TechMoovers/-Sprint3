@@ -29,7 +29,7 @@ fkSuporte int
 
 INSERT INTO usuario VALUES
 (null, 'JBS S/A', 'Friboi', '02916265004076', 'friboi@gmail.com', 'Friboi47', 10),
-(null, 'Transporte de gado JBS','Uboi', '02916265000160',sensoressensoressensoressensoressensoressensores 'uboi@gmail.com', 'uboi1547',11);
+(null, 'Transporte de gado JBS','Uboi', '02916265000160','uboi@gmail.com', 'uboi1547',11);
 
 
 create table boi (
@@ -147,6 +147,6 @@ join usuario on usuario.idUsuario = caminhao.fkUsuario;
 select usuario.nomeFantasia,  suporte.tipoSuporte, suporte.nmrChamado, suporte.dtChamado, suporte.dtConclusão 
 from usuario join suporte on idSuporte = fkSuporte;
 
- -- drop database TechMoovers;
+ --  drop database TechMoovers;
 
 
