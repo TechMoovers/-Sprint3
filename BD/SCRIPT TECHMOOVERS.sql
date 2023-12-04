@@ -110,16 +110,16 @@ alter table usuario add constraint fkSup foreign key (fkSuporte) references supo
 
 create table alertaUmidade(
 idAlertaU int primary key auto_increment,
-idealU decimal (2,1),
-criticoU decimal (2,1),
-alertaU decimal (2,1)
+idealU decimal (3,1),
+criticoU decimal (3,1),
+alertaU decimal (3,1)
 );
 
 create table alertaTemperatura(
 idAlertaT int primary key auto_increment,
-idealT decimal (2,1),
-criticoT decimal (2,1),
-alertaT decimal (2,1)
+idealT decimal (3,1),
+criticoT decimal (3,1),
+alertaT decimal (3,1)
 );
 
 
