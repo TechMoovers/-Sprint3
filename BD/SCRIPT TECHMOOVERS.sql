@@ -34,11 +34,11 @@ INSERT INTO usuario VALUES
 
 create table boi (
 idBoi int primary key auto_increment,
-qtdBois varchar(45),
+qtdEspecies varchar(45),
 fkUsuario int,
 constraint fkUser foreign key (fkUsuario) references usuario (idUsuario));
 
-alter table boi rename column qtdBois to qtdEspecies;
+
 
 insert into boi values
 (null, 90 , '1'),
@@ -51,11 +51,14 @@ create table sensores(
 idSensores int primary key auto_increment,
 umidade decimal,
 temperatura decimal,
-dtRegistro datetime);
+dtRegistro datetime,
+fkAlertaU int,
+fkAlertaT int
+);
 
 insert into sensores values
-(null,'25','10','2023-05-10 20:37'),
-(null,'22','35','2023-05-10 20:35');
+(null,'25','10','2023-05-10 20:37',1,2),
+(null,'22','35','2023-05-10 20:35',2,1);
 
 create table caminhao(
 idTransp int primary key auto_increment,
@@ -106,7 +109,6 @@ insert into suporte values
 
 select * from suporte;
 
-alter table usuario add constraint fkSup foreign key (fkSuporte) references suporte (idSuporte);
 
 create table alertaUmidade(
 idAlertaU int primary key auto_increment,
@@ -115,6 +117,13 @@ criticoU decimal (3,1),
 alertaU decimal (3,1)
 );
 
+ insert into alertaUmidade values
+ (null, '55.4','75.0','69.5'),
+ (null,'54.0','70.0','68.0'); 
+ 
+ select * from alertaUmidade; 
+
+
 create table alertaTemperatura(
 idAlertaT int primary key auto_increment,
 idealT decimal (3,1),
@@ -122,6 +131,18 @@ criticoT decimal (3,1),
 alertaT decimal (3,1)
 );
 
+ insert into alertaTemperatura values 
+ (null,'25.5','32.5','28.0'), 
+ (null,'24.5','33.5','29.0');
+ 
+ select * from alertaTemperatura; 
+
+ 
+ 
+
+  alter table usuario add constraint  fkSup foreign key (fkSuporte) references suporte (idSuporte); 
+   alter table sensores  add constraint fkUmi foreign key  (fkAlertaU) references alertaUmidade (idAlertaU); 
+    alter table   sensores  add constraint  fkTemp foreign key  (fkAlertaT) references alertaTemperatura (idAlertaT);
 
 -- joins -
 
@@ -147,6 +168,15 @@ join usuario on usuario.idUsuario = caminhao.fkUsuario;
 select usuario.nomeFantasia,  suporte.tipoSuporte, suporte.nmrChamado, suporte.dtChamado, suporte.dtConclusão 
 from usuario join suporte on idSuporte = fkSuporte;
 
- --  drop database TechMoovers;
+
+SELECT usuario.nomeFantasia, alertaUmidade.idealU, alertaTemperatura.idealT, caminhao.qtdBovinos, caminhao.placa
+FROM sensores
+JOIN alertaUmidade ON sensores.fkAlertaU = alertaUmidade.idAlertaU
+JOIN alertaTemperatura ON sensores.fkAlertaT = alertaTemperatura.idAlertaT
+JOIN caminhao ON caminhao.fksensor = caminhao.idTransp
+JOIN usuario ON usuario.idUsuario = caminhao.fkUsuario;
+
+
+  -- drop database TechMoovers;
 
 
