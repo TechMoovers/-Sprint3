@@ -169,7 +169,7 @@ select usuario.nomeFantasia,  suporte.tipoSuporte, suporte.nmrChamado, suporte.d
 from usuario join suporte on idSuporte = fkSuporte;
 
 
-SELECT usuario.nomeFantasia, alertaUmidade.idealU, alertaTemperatura.idealT, caminhao.qtdBovinos, caminhao.placa
+SELECT usuario.nomeFantasia, caminhao.placa, caminhao.qtdBovinos, alertaUmidade.idealU, alertaTemperatura.idealT
 FROM sensores
 JOIN alertaUmidade ON sensores.fkAlertaU = alertaUmidade.idAlertaU
 JOIN alertaTemperatura ON sensores.fkAlertaT = alertaTemperatura.idAlertaT
